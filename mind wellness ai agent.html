@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Wellness - Nurture Your Mental Health</title>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .wellness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .wellness-card {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .wellness-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .wellness-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .wellness-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: #f8f9ff;
+            padding: 80px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .tip-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Creator Section */
+        .creator-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .creator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .creator-info h2 {
+            color: white;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .creator-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .creator-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .creator-image {
+            text-align: center;
+        }
+
+        .creator-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .creator-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .creator-info h2 {
+                text-align: center;
+            }
+
+            .creator-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .creator-avatar {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">🧠 Mind Wellness</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#wellness">Wellness</a></li>
+                <li><a href="#creator">About</a></li>
+                <li><a href="#tips">Tips</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Nurture Your Mind, Nurture Your Life</h1>
+            <p>Discover the power of mental wellness and unlock your full potential through mindful practices and self-care.</p>
+            <a href="#wellness" class="cta-button">Start Your Wellness Journey</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Wellness Practices Section -->
+            <section id="wellness" class="section">
+                <h2>Wellness Practices</h2>
+                <div class="wellness-grid">
+                    <div class="wellness-card">
+                        <h3>🧘‍♀️ Meditation</h3>
+                        <p>Practice mindfulness meditation to reduce stress, improve focus, and cultivate inner peace. Start with just 5 minutes daily.</p>
+                    </div>
+                    <div class="wellness-card">
+                        <h3>💤 Quality Sleep</h3>
+                        <p>Prioritize 7-9 hours of quality sleep each night. Create a relaxing bedtime routine and maintain a consistent sleep schedule.</p>
+                    </div>
+                    <div class="wellness-card">
+                        <h3>🏃‍♂️ Physical Activity</h3>
+                        <p>Regular exercise releases endorphins, reduces anxiety, and improves mood. Find activities you enjoy and make them part of your routine.</p>
+                    </div>
+                    <div class="wellness-card">
+                        <h3>📝 Journaling</h3>
+                        <p>Express your thoughts and feelings through writing. Journaling helps process emotions and gain clarity about your experiences.</p>
+                    </div>
+                    <div class="wellness-card">
+                        <h3>🌿 Nature Connection</h3>
+                        <p>Spend time outdoors to reduce stress and improve mental clarity. Nature has a calming effect on the mind and body.</p>
+                    </div>
+                    <div class="wellness-card">
+                        <h3>🤝 Social Connection</h3>
+                        <p>Maintain meaningful relationships and social connections. Human connection is essential for mental well-being.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tips Section -->
+    <section id="tips" class="tips-section">
+        <div class="container">
+            <h2>Daily Wellness Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Morning Routine</h4>
+                    <p>Start your day with 10 minutes of stretching, deep breathing, or a short meditation to set a positive tone.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Digital Detox</h4>
+                    <p>Take regular breaks from screens. Set aside time each day to disconnect and be present in the moment.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Gratitude Practice</h4>
+                    <p>Write down three things you're grateful for each day. This simple practice can significantly improve your mood.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Mindful Eating</h4>
+                    <p>Pay attention to what and how you eat. Savor your food and eat without distractions.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Breathing Exercises</h4>
+                    <p>Practice deep breathing techniques throughout the day to reduce stress and increase focus.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Self-Compassion</h4>
+                    <p>Be kind to yourself. Treat yourself with the same compassion you would offer a good friend.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creator Section -->
+    <section id="creator" class="creator-section">
+        <div class="container">
+            <div class="creator-content">
+                <div class="creator-info">
+                    <h2>About the Creator</h2>
+                    <p>I'm a passionate advocate for mental health and a firm believer in the power of mindfulness practices. With a background in psychology and a deep understanding of the importance of mental wellness, I've dedicated my life to helping others find balance and peace in their lives.</p>
+                </div>
+                <div class="creator-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years of Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="creator-image">
+                    <div class="creator-avatar">🧠</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Mind Wellness</h3>
+                    <p>Dedicated to promoting mental health awareness and providing resources for personal well-being and growth.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#wellness">Wellness Practices</a></p>
+                    <p><a href="#tips">Daily Tips</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@mindwellness.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <p>Follow us on social media</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Mind Wellness. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Wellness Assistant -->
+    <elevenlabs-convai agent-id="agent_01jypgswgbeaftvey3hw7etds6"></elevenlabs-convai>
+</body>
+</html> 
